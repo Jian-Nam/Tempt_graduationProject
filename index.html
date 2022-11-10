@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name = "viewport" content = "width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+        <link rel = "stylesheet" href = "./study/src/css/index.css">
+        <script type="importmap">
+            {
+                "imports": {
+                    "three": "./build/three.module.js"
+                }
+            }
+        </script>
+        <title>TRANS_HYPE</title>
+        <script type = "module" src = "./study/src/js/index.js" ></script>
+        
+    </head>
+    <body>
+        <div id = "title" class = "text , clickable">TRANS_HYPE</div>
+        
+        <ul id = "menu">
+            <li id = "toggle" class = "text , clickable">Virtual space</li>
+            <li id = "place_shop" class = "text , clickable">Place - Shop</li>
+            <li id = "graffity_shop" class = "text , clickable">Graffity - Shop</li>
+            <li id = "project" class = "text , clickable">Project</li>
+            <li id = "contact" class = "text , clickable">Contact</li>
+        </ul>
+        <div id = "virtual_space_container" class = "container">
+            <div id = "discription">
+                <div id = "discription_video_virtual">
+                    <div id = "pixels"></div>
+                </div>
+                <div id = "discription_virtual" class = "discription">
+                    <div id = "discription_title_virtual" class = "text">
+                        <div id = "area_number"></div>
+                        <div id = "Occupied_by">Occupied_by<p id = "owner"></p></div>
+                    </div>
+                    <div id = "discription_main" class = "text">
+                        <hr><br>
+                        <div id = "Area_size" class = "area_info">Area Size: </div>
+                        <div id = "Popularity" class = "area_info">Popularity: </div>
+                        <div id = "Price" class = "area_info">Price: </div>
+                        <div id = "Building_size" class = "area_info">Architecture size: </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </body>
+</html>

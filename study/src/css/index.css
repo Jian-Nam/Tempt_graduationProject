@@ -1,0 +1,321 @@
+* {
+    outline: none;
+    margin: 0;
+}
+
+body {
+    overflow: hidden;
+}
+
+#title {
+    position:absolute;
+    font-size: 5vh;
+    font-weight: 900;
+    left:3vh;
+    top: 1vh;
+}
+
+/* #toggle {
+   
+    writing-mode: vertical-lr;
+    
+    font-size: large;
+    top: 5%;
+    right: 2%;
+    z-index: 2;
+    transform: rotate(0.5turn);
+} */
+
+#menu{
+    background-color: #000000;
+    border-right: 1px solid;
+    border-color: white;
+    height:100%;
+    display: inline-flex;
+    z-index: 2;
+    font-size: 1.2vh;
+    right :0%;
+    position:absolute;
+    writing-mode: vertical-lr;
+    transform: rotate(0.5turn);
+    list-style-type: none;
+}
+
+li{
+    width:4vh;
+    height:20%;
+    text-align: center;
+    line-height: 4vh;
+
+    font-weight: 500;
+
+    -webkit-transition: all 300ms cubic-bezier(.6,0,.4,1);
+    -ms-transition: all 300ms cubic-bezier(.6,0,.4,1);
+    transition: all 300ms cubic-bezier(.6,0,.4,1);
+}
+
+.container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    -webkit-transition: top 500ms ease;
+    -ms-transition: top 500ms ease;
+    transition: top 500ms ease;
+}
+
+#virtual_space_container {
+    top: 0%;
+    left: 0%;
+}
+
+#real_space_container{
+    top: 100%;
+    left: 0%;
+}
+
+.text {
+    font-family: 'Noto Sans KR', sans-serif;
+    color:white;
+    z-index: 1;
+
+}
+
+#discription_video_virtual {
+    position: absolute;
+    overflow: hidden;
+    width: 100vh;
+    height: 100%;
+    top: 0%;
+    left: 35vh;
+    z-index: 1;
+
+    -webkit-transition: left 500ms cubic-bezier(.6,0,.4,1);
+    -ms-transition: left 500ms cubic-bezier(.6,0,.4,1);
+    transition: left 500ms cubic-bezier(.6,0,.4,1);
+
+}
+
+
+
+#discription {
+    position: absolute;
+    top:0;
+    right:-135vh;
+    width: 135vh;
+    height:100%;
+    
+    -webkit-transition: all 500ms cubic-bezier(.6,0,.4,1);
+    -ms-transition: all 500ms cubic-bezier(.6,0,.4,1);
+    transition: all 500ms cubic-bezier(.6,0,.4,1);
+}
+
+#discription_virtual {
+    overflow: hidden;
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    z-index: 1;
+    /* background-color: #000000; */
+
+
+    width: 35vh;
+    height: 100%;
+    background-color: #000000;
+    border-left: 2px solid;
+    border-right: 1px solid;
+    border-color: white;
+}
+
+
+
+#discription_title_virtual {
+    position: absolute;
+    writing-mode: vertical-rl;
+    transform: scale(-1, -1); 
+    text-align: right;
+    top:3vh;
+    right: 3vh;
+}
+
+#area_number{
+    font-size: 8vh;
+    font-weight: 900;
+}
+
+#Occupied_by{
+    font-size: 3vh;
+    font-weight: 400;
+    color:#DDDDDD;
+}
+
+#owner {
+    font-size: 3vh;
+    font-weight: 900;
+    color:#FF0000;
+}
+
+.area_info {
+    color:#DDDDDD;
+    font-weight: 300;
+    font-size: 1.5vh;
+    line-height: 2.5vh;
+    margin-left: 3vh;
+}
+
+hr{
+    border:0;
+    height: 0.5px;
+    background: white;
+}
+
+#discription_main {
+    position:absolute;
+    width:100%;
+    top: 60%;
+    font-size: 100%;
+    line-height: 150%;
+}
+
+
+#discription_main_real {
+    position:absolute;
+    top: 3%;
+    left: 35vh;
+    right: 10%;
+    
+}
+
+
+.clickable{
+    cursor: pointer;
+}
+
+
+#pixels{
+    position:absolute;
+    z-index: 2;
+    width:100%;
+    height:100%;
+}
+
+.bike{
+    animation-duration: 4s;
+    animation-name: slide_bike;
+    animation-iteration-count: infinite;
+
+    position:absolute;
+    height:20vh;
+    bottom: 5vh;
+}
+
+.car{
+    animation-duration: 3s;
+    animation-name: slide_car;
+    animation-iteration-count: infinite;
+
+    position:absolute;
+    height:20vh;
+    bottom: 5vh;
+}
+
+.human{
+    animation-duration: 7s;
+    animation-name: slide_human;
+    animation-iteration-count: infinite;
+
+    position:absolute;
+    height:30vh;
+    bottom: 5vh;
+
+}
+
+.kickboard{
+    animation-duration: 5s;
+    animation-name: slide_kickboard;
+    animation-iteration-count: infinite;
+
+    position:absolute;
+    height:40vh;
+    bottom: 5vh;
+
+}
+
+.truck{
+    animation-duration: 3s;
+    animation-name: slide_truck;
+    animation-iteration-count: infinite;
+
+    position:absolute;
+    height:20vh;
+    bottom: 5vh;
+
+}
+
+@keyframes slide_bike {
+    from {
+        top: 75%;  
+        left: 100%;
+    }
+  
+    to {
+        top: 75%;  
+        left: 0%;
+    }
+  }
+
+  @keyframes slide_car {
+    from {
+        top: 5%;  
+        left: 0%;
+    }
+  
+    to {
+        top: 5%;  
+        left: 80%;
+    }
+  }
+
+  @keyframes slide_human {
+    from {
+        top: 60%;  
+        left: 100%;
+    }
+  
+    to {
+        top: 0%;  
+        left: 0%;
+    }
+  }
+
+  @keyframes slide_kickboard {
+    from {
+        top: 75%;  
+        left: 100%;
+    }
+  
+    to {
+        top: 15%;  
+        left: 0%;
+    }
+  }
+
+  @keyframes slide_truck {
+    from {
+        top: 80%;  
+        left: 100%;
+    }
+  
+    to {
+        top: 10%;  
+        left: 0%;
+    }
+  }
+
+
+.sub_text{
+    font-family: 'Noto Sans KR', sans-serif;
+    color:#FFFFFF;
+    z-index: 1;
+}

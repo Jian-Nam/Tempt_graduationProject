@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name = "viewport" content = "width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+        <link rel = "stylesheet" href = "./study/src/css/place_shop.css">
+        <script type="importmap">
+            {
+                "imports": {
+                    "three": "./build/three.module.js"
+                }
+            }
+        </script>
+        <title>TRANS_HYPE</title>
+        <script type = "module" src = "./study/src/js/place_shop.js" ></script>
+        
+    </head>
+    <body>
+        <div id = "title" class = "text , clickable">TRANS_HYPE</div>
+        <ul id = "menu">
+            <li id = "toggle" class = "text , clickable">Virtual space</li>
+            <li id = "place_shop" class = "text , clickable">Place - Shop</li>
+            <li id = "graffity_shop" class = "text , clickable">Graffity - Shop</li>
+            <li id = "project" class = "text , clickable">Project</li>
+            <li id = "contact" class = "text , clickable">Contact</li>
+        </ul>
+        <div id = "Area" class = "text">
+            <div id ="Area_id">Area_A01</div>
+            <div id ="Area_info">
+                <div id = "Area_size">Area_size: 200*300*200</div>
+                <div id = "Occupied">Occupied_by</div>
+                <div id = "Area_owner">NONE</div>
+            </div>
+        </div>
+        
+        <div id = area_list_container>
+            <div id = "hover_notice", class = "text">HOVER TO SELECT AREA</div>
+            <ul id = "area_list" class = "text"></ul>
+        </div>
+        <div id = "canvus_container"></div>
+        <div id = "virtual_map_2d">
+        </div>
+
+    </body>
+</html>

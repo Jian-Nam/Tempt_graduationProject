@@ -1,0 +1,30 @@
+* {
+    outline: none;
+    margin: 0;
+}
+
+body {
+    overflow: hidden;
+    background-color: black;
+}
+
+#title {
+    position:absolute;
+    font-size: 5vh;
+    font-weight: 900;
+    left:3vh;
+    top: 1vh;
+}
+.text {
+    font-family: 'Noto Sans KR', sans-serif;
+    color:#FFFFFF;
+    z-index: 1;
+
+    -webkit-transition: color 500ms ease;
+    -ms-transition: color 500ms ease;
+    transition: color 500ms ease;
+}
+
+.clickable{
+    cursor: pointer;
+}
