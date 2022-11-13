@@ -39,6 +39,7 @@ body {
     writing-mode: vertical-lr;
     transform: rotate(0.5turn);
     list-style-type: none;
+    overflow: hidden;
 }
 
 li{

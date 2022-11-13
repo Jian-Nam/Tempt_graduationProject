@@ -42,7 +42,7 @@ export class virtual_space_individual{
             100
         );
         //camera.position.z = 9;
-        camera.position.set(0, 12, 10);
+        camera.position.set(0, 15, 15);
         camera.lookAt(0, 5, 0);
 
         this._camera =  camera;
@@ -93,8 +93,6 @@ export class virtual_space_individual{
         let objLoader = new OBJLoader();
 
         
-
-
         for(let i = 0; i< this.building_objects.length; i++){ 
             this._scene.remove( this.building_objects[i] )
         }
@@ -108,7 +106,7 @@ export class virtual_space_individual{
 
         let buiding_names = Area_table[name].buildings;
 
-        let url = "./study/src/architectures/" + buiding_names[0];
+        let url = "./study/src/areas/" + buiding_names[0];
 
         objLoader.load(url, (obj) => {
             // obj.material = new THREE.MeshNormalMaterial();

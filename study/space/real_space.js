@@ -44,7 +44,7 @@ export class real_space{
             100
         );
         //camera.position.z = 9;
-        camera.position.set(0, 2, 5);
+        camera.position.set(0, 3, 0);
 
 
 
@@ -116,7 +116,7 @@ export class real_space{
     }
 
     _setupControls() {
-        this.container.addEventListener("wheel", (event) => {this.move_camera(event);})
+        // this.container.addEventListener("wheel", (event) => {this.move_camera(event);})
     }
 
     move_camera(event){
@@ -159,8 +159,7 @@ export class real_space{
                         // this.toggle.style.color = "#000000"
                         // this.title.style.color = "#000000"
                         // this.discription_main.innerHTML = Place_table[this.raycasting_obj[i].name];
-                        this.discription.style.left = "25%";
-                        this.discription_video.style.left = "10%";
+                        this.discription.style.right = "0%";
                     } 
                 }
             }
@@ -187,9 +186,35 @@ export class real_space{
         this._renderer.setClearColor( 0x000000, 1 );
         //auto rotation
         time *= -0.0002; // second unit
-        this._scene.rotation.y = time;
+        // this._scene.rotation.y = time;
         //mouse hover
         //this._camera.position.y = time;
+
+        if(this.mouse && this.hoverable){
+            let fraction = 0.1
+
+            const minX = -7;
+            const maxX = 7;
+
+            const minZ = -5;
+            const maxZ = 5;
+
+
+            let compare_plusXY = this.mouse.y > this.mouse.x;
+            let compare_minusXY = this.mouse.y > -this.mouse.x;
+
+            if(compare_plusXY + compare_minusXY == 1){
+                if(Math.abs(this.mouse.x)>0.3){
+                    this._camera.position.x = Math.min(Math.max(this._camera.position.x + this.mouse.x * fraction, minX), maxX);
+                }
+            }else{
+                if(Math.abs(this.mouse.y)>0.3){
+                    this._camera.position.z = Math.min(Math.max(this._camera.position.z - this.mouse.y * fraction, minZ), maxZ);
+                }
+            }
+        }
+
+
         if(this.raycasting_obj && this.rayCaster){
             for(let i = 0; i < this.raycasting_obj.length; i++){
                 this.raycasting_obj[i].material.opacity = 0.7
@@ -210,8 +235,8 @@ export class real_space{
                             this.graffiti_style.innerHTML = info.graffiti_style;
                             this.wall_size.innerHTML = info.wall_size;
 
-                            this.discription.style.left = String(this.container.clientWidth-this.container.clientHeight*0.35) + "px"
-                            this.discription_video.style.left = "70%";
+
+                            this.discription.style.right = "-96vh"
 
                             // let p = intersects[0].object.position.clone();
                             // p.multiplyScalar(0.01);
@@ -233,8 +258,7 @@ export class real_space{
                     }
                 }else {
                     for(let i = 0; i < this.raycasting_obj.length; i++){
-                        this.discription.style.left = "100%";
-                        this.discription_video.style.left = "100%";
+                        this.discription.style.right = "-135vh";
 
                         
                     }
