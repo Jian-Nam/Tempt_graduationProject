@@ -104,19 +104,24 @@ export class virtual_space{
 
             const animationClips = gltf.animations;
             const mixer = new THREE.AnimationMixer(model);
+            const mixer2 = new THREE.AnimationMixer(model2);
+            const mixer3 = new THREE.AnimationMixer(model3);
             const animationsMap = {};
             animationClips.forEach(clip => {
-                const name = clip.name;
-                // console.log(name);
-                animationsMap[name] = mixer.clipAction(clip);
+                mixer.clipAction(clip).play();
+                mixer2.clipAction(clip).play();
+                mixer3.clipAction(clip).play();
             });
 
             this._mixer = mixer;
+            this._mixer2 = mixer2;
+            this._mixer3 = mixer3;
+
             this._animationMap = animationsMap;
 
-            for(let id in animationsMap){
-                animationsMap[id].play();
-            }
+            // for(let id in animationsMap){
+            //     animationsMap[id].play();
+            // }
         })
 
 
@@ -270,6 +275,9 @@ export class virtual_space{
         if(this._mixer) {
             const deltaTime = time - this._previousTime;
             this._mixer.update(deltaTime);
+            this._mixer2.update(deltaTime);
+            this._mixer3.update(deltaTime);
+
         }
         this._previousTime = time;
 
