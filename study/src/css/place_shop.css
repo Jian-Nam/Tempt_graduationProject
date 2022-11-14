@@ -28,7 +28,6 @@ body {
 }
 
 #area_list_container {
-    padding:0;
     overflow: hidden;
     position:absolute;
     width:40vh;
@@ -43,9 +42,15 @@ body {
  
     border-left:solid 2px #FFFFFF;
 
+    background-color: #000000;
+
     -webkit-transition: right  300ms cubic-bezier(.6,0,.4,1);
     -ms-transition: right 300ms cubic-bezier(.6,0,.4,1);
     transition: right 300ms cubic-bezier(.6,0,.4,1);
+}
+
+#area_list_container::-webkit-scrollbar{
+    display:none;
 }
 
 #area_list{
@@ -63,11 +68,14 @@ body {
 
 }
 
+#area_list::-webkit-scrollbar{
+    display:none;
+}
+
 #area_list > li{
     padding:1vh;
     width:36vh;
-    height:7vh;
-
+    height:5vh;
 
     /* border-left:solid 2px #FFFFFF; */
     /* border-right:solid 2px #FFFFFF; */
@@ -135,7 +143,8 @@ body {
     background-color: #000000;
     border-right: 1px solid;
     border-color: white;
-    height:100%;
+    width:4vh;
+    height:100vh;
     display: inline-flex;
     z-index: 3;
     font-size: 1.2vh;
@@ -161,13 +170,6 @@ body {
 
 
 
-
-
-
-
-#area_list_container::-webkit-scrollbar{
-    display:none;
-}
 
 #canvus_container {
     position: absolute;

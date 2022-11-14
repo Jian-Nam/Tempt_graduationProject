@@ -98,8 +98,8 @@ class App{
             value.addEventListener("mouseover", ()=>{
                 value.children[0].style.opacity = 1;
                 value.children[1].style.opacity = 1;
-                value.style.paddingTop = "3vh";
-                value.style.paddingBottom = "3vh";
+                value.style.paddingTop = "2vh";
+                value.style.paddingBottom = "2vh";
                 value.style.background = "#101010";
                 this.virtual_map_2d.style.opacity = 0.9;
                 // console.log(document.querySelector("#" + value.id + "_2d_map"))
