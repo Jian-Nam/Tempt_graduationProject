@@ -98,8 +98,8 @@ class App{
             value.addEventListener("mouseover", ()=>{
                 value.children[0].style.opacity = 1;
                 value.children[1].style.opacity = 1;
-                value.style.paddingTop = "15vh";
-                value.style.paddingBottom = "15vh";
+                value.style.paddingTop = "3vh";
+                value.style.paddingBottom = "3vh";
                 value.style.background = "#101010";
                 this.virtual_map_2d.style.opacity = 0.9;
                 // console.log(document.querySelector("#" + value.id + "_2d_map"))
@@ -108,18 +108,17 @@ class App{
             value.addEventListener("mouseout", ()=>{
                 value.children[0].style.opacity = 0.3;
                 value.children[1].style.opacity = 0.1;
-                value.style.paddingTop = "5vh";
-                value.style.paddingBottom = "5vh";
+                value.style.paddingTop = "1vh";
+                value.style.paddingBottom = "1vh";
                 value.style.background = "#000000";
                 this.virtual_map_2d.style.opacity = 0.1;
                 document.querySelector("#" + value.id + "_2d_map").style.filter = "invert(100%) sepia(100%) saturate(0%) hue-rotate(292deg) brightness(108%) contrast(108%)"
             });
-            value.addEventListener("click", (event)=>{this.show_palce(event)});
+            value.addEventListener("click", (event)=>{this.show_palce(event.currentTarget.id)});
         }
     }
 
-    show_palce(event){
-        let current_id = event.currentTarget.id;
+    show_palce(current_id){
         this.Area_id.innerHTML = current_id;
         this.Area_size.innerHTML = "Area_size : " + Area_table[current_id].size;
         this.Area_owner.innerHTML = Area_table[current_id].owner;
@@ -159,7 +158,7 @@ class App{
         const objLoader = new OBJLoader
 
         this.objects = [];
-        this.reset_model("Area_A01")
+        this.show_palce("X1")
     }
 
     _setupControls() {
@@ -169,64 +168,21 @@ class App{
     reset_model(name){
         console.log(name)
         const objLoader = new OBJLoader();
-        let object_names = Area_table[name].buildings
+
 
         for(let i = 0; i< this.objects.length; i++){ 
             this._scene.remove( this.objects[i] )
         }
 
         this.objects = [];
+        let url = Area_table[name].area
 
-        for(let i = 0; i< object_names.length; i++){ 
-            let directory = './study/src/architectures/' + object_names[i]
-            objLoader.load(directory, (obj)=>{
-                obj.children[0].material = new THREE.MeshNormalMaterial();
-                this._scene.add( obj );
-                this.objects.push(obj);
-            })
-        }
+        objLoader.load(url, (obj)=>{
+            obj.children[0].material = new THREE.MeshNormalMaterial();
+            this._scene.add( obj );
+            this.objects.push(obj);
+        });
     }
-
-    // _setupPicking() {
-    //     this.hoverable = 1;
-    //     this.rayCaster = new THREE.Raycaster();
-    //     this._renderer.domElement.addEventListener("mousemove", this.onMouseMove.bind(this), false);
-    //     this._renderer.domElement.addEventListener("click", this.onMouseClick.bind(this), false);
-    //     console.log(this.architecture.children[0].children)
-    //     //this.raycasting_obj = this.architecture.children[0].children.slice(1,);
-    // }
-
-    // onMouseMove(e) {
-    //     this.mouse = new THREE.Vector2();
-    //     this.mouse.x = this.mouse.y = -1;
-    //     this.mouse.x = (e.clientX/window.innerWidth)*2-1;
-    //     this.mouse.y = -((e.clientY/window.innerHeight)*2-1);
-
-    //     this.rayCaster.setFromCamera(this.mouse, this._camera);
-    // }
-
-    // onMouseClick(e) {
-
-    //     if(this.hoverable == 0){
-    //         this.hoverable = 1
-    //         // this.toggle.style.color = "#00FF00"
-    //         // this.title.style.color = "#00FF00"
-    //     }else{
-    //         let intersects = this.rayCaster.intersectObjects(this.raycasting_obj);
-
-    //         if(intersects[0]){
-    //             for(let i = 0; i < this.raycasting_obj.length; i++){
-    //                 if(intersects[0].object == this.raycasting_obj[i]) {
-    //                     this.hoverable = 0;
-    //                     // this.toggle.style.color = "#000000"
-    //                     // this.title.style.color = "#000000"
-    //                     this.discription.style.left = "20%";
-    //                     this.discription_video.style.left = "20%";
-    //                 } 
-    //             }
-    //         }
-    //     }
-    // }
 
     resize() {
         const width = this.container.clientWidth;
@@ -300,24 +256,6 @@ class App{
         //         }
         //     }
         // }
-    }
-
-    draw(){
-        this.ctx.fillStyle = `#00ff00`
-        this.ctx.fillRect(100, 100, 1000, 1000);
-    }
-
-    drawHexagon(x, y) {
-        const a = 2 * Math.PI / 6;
-        const r = 50;
-
-        this.ctx.beginPath();
-        for (var i = 0; i < 6; i++) {
-          this.ctx.lineTo(x + r * Math.cos(a * i), y + r * Math.sin(a * i));
-        }
-        this.ctx.closePath();
-        this.ctx.fillStyle = `#00ff00`
-        this.ctx.fill();
     }
 }
 

@@ -7,6 +7,7 @@ import { Place_table } from "../db/database.js"
 export class real_space{
     constructor(){
         this.container = document.querySelector("#real_space_container");
+
         this.discription = document.querySelector('#discription_real');
         this.discription_video = document.querySelector('#discription_video_real');
         this.discription_title = document.querySelector('#discription_title_real');
@@ -14,6 +15,7 @@ export class real_space{
         this.graffiti_size = document.querySelector('#graffiti_size');
         this.graffiti_style = document.querySelector('#graffiti_style');
         this.wall_size = document.querySelector('#wall_size');
+        this.maintext = document.querySelector('#maintext');
 
         const renderer = new THREE.WebGL1Renderer({antialias: true});
         renderer.setPixelRatio(window.devicePixelRatio);
@@ -99,9 +101,9 @@ export class real_space{
                 if(child instanceof THREE.Mesh){
                     // child.material = new THREE.MeshPhongMaterial({transparent:true, opacity:0.7});
                     // child.material = new THREE.MeshStandardMaterial();
-                    child.material = new THREE.MeshNormalMaterial({transparent:true, opacity:0.7});
+                    // child.material = new THREE.MeshNormalMaterial({transparent:true, opacity:0.7});
                     
-                    // child.material = new THREE.MeshBasicMaterial({color:0x00ff00, wireframe:true});
+                    child.material = new THREE.MeshBasicMaterial({color:0x00ffff});
                     this.raycasting_obj.push(child);
 
                     const edges = new THREE.EdgesGeometry( child.geometry );
@@ -156,10 +158,7 @@ export class real_space{
                     if(intersects[0].object == this.raycasting_obj[i]) {
                         this.hoverable = 0;
                         console.log( this.raycasting_obj[i].position);
-                        // this.toggle.style.color = "#000000"
-                        // this.title.style.color = "#000000"
-                        // this.discription_main.innerHTML = Place_table[this.raycasting_obj[i].name];
-                        this.discription.style.right = "0%";
+                        this.discription.style.right = "4vh";
                     } 
                 }
             }
@@ -182,13 +181,7 @@ export class real_space{
         requestAnimationFrame(this.render.bind(this));
     }
 
-    update(time) {
-        this._renderer.setClearColor( 0x000000, 1 );
-        //auto rotation
-        time *= -0.0002; // second unit
-        // this._scene.rotation.y = time;
-        //mouse hover
-        //this._camera.position.y = time;
+    control_camera(){
 
         if(this.mouse && this.hoverable){
             let fraction = 0.1
@@ -213,59 +206,48 @@ export class real_space{
                 }
             }
         }
+    }
 
+    reset_discription(name){
+        var info = Place_table[name]
+        this.discription_title.innerHTML = info.address_eng
+        this.graffiti_info.innerHTML = "";
+        this.graffiti_size.innerHTML = info.graffiti_size;
+        this.graffiti_style.innerHTML = info.graffiti_style;
+        this.wall_size.innerHTML = info.wall_size;
+        this.maintext.innerHTML = info.discription;
+    }
+
+    update(time) {
+        this._renderer.setClearColor( 0x000000, 1 );
+        //auto rotation
+        time *= -0.0002; // second unit
+        // this._scene.rotation.y = time;
+
+        //mouse hover
+        this.control_camera();
 
         if(this.raycasting_obj && this.rayCaster){
             for(let i = 0; i < this.raycasting_obj.length; i++){
                 this.raycasting_obj[i].material.opacity = 0.7
             }
+            
             let intersects = this.rayCaster.intersectObjects(this.raycasting_obj);
+
             if(this.hoverable){
-
                 if(intersects[0]){
-
                     intersects[0].object.material.opacity = 0.9;
                     // intersects[0].object.rotation.y = time*10;
                     for(let i = 0; i < this.raycasting_obj.length; i++){
                         if(intersects[0].object == this.raycasting_obj[i]) {
-                            var info = Place_table[intersects[0].object.name]
-                            this.discription_title.innerHTML = info.address_eng
-                            this.graffiti_info.innerHTML = "";
-                            this.graffiti_size.innerHTML = info.graffiti_size;
-                            this.graffiti_style.innerHTML = info.graffiti_style;
-                            this.wall_size.innerHTML = info.wall_size;
-
-
-                            this.discription.style.right = "-96vh"
-
-                            // let p = intersects[0].object.position.clone();
-                            // p.multiplyScalar(0.01);
-                            // let q = p.clone();
- 
-
-                            // this.camera_lookat.multiplyScalar(0.999);
-                            // p.multiplyScalar(0.001);
-                            // this.camera_lookat.add(p);
-                            // this._camera.lookAt(this.camera_lookat)
-
-
-                            // q.addScalar(2);
-                            // this._camera.position.multiplyScalar(0.97);
-                            // q.multiplyScalar(0.03);
-                            // this._camera.position.add(q);
-                            
+                            this.reset_discription(intersects[0].object.name)
+                            this.discription.style.right = "-96vh"                          
                         }
                     }
                 }else {
                     for(let i = 0; i < this.raycasting_obj.length; i++){
                         this.discription.style.right = "-135vh";
-
-                        
                     }
-                    // this._camera.position.multiplyScalar(0.99);
-                    // this._camera.position.y += 0.15;
-                    // this.camera_lookat.multiplyScalar(0.99);
-                    // this._camera.lookAt(this.camera_lookat);
                 }
             }
         }

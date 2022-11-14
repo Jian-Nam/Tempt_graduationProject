@@ -202,6 +202,7 @@ hr{
 }
 
 .bike{
+    animation-timing-function: linear;
     animation-duration: 4s;
     animation-name: slide_bike;
     animation-iteration-count: infinite;
@@ -212,6 +213,7 @@ hr{
 }
 
 .car{
+    animation-timing-function: linear;
     animation-duration: 3s;
     animation-name: slide_car;
     animation-iteration-count: infinite;
@@ -222,6 +224,7 @@ hr{
 }
 
 .human{
+    animation-timing-function: linear;
     animation-duration: 7s;
     animation-name: slide_human;
     animation-iteration-count: infinite;
@@ -233,6 +236,7 @@ hr{
 }
 
 .kickboard{
+    animation-timing-function: linear;
     animation-duration: 5s;
     animation-name: slide_kickboard;
     animation-iteration-count: infinite;
@@ -244,8 +248,9 @@ hr{
 }
 
 .truck{
+    animation-timing-function: linear;
     animation-duration: 3s;
-    animation-name: slide_truck;
+    animation-name: slide_bike;
     animation-iteration-count: infinite;
 
     position:absolute;
@@ -257,24 +262,24 @@ hr{
 @keyframes slide_bike {
     from {
         top: 75%;  
-        left: 100%;
+        left: 150%;
     }
   
     to {
         top: 75%;  
-        left: 0%;
+        left: -50%;
     }
   }
 
   @keyframes slide_car {
     from {
         top: 5%;  
-        left: 0%;
+        left: -50%;
     }
   
     to {
         top: 5%;  
-        left: 80%;
+        left: 150%;
     }
   }
 

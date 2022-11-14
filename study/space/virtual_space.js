@@ -129,7 +129,7 @@ export class virtual_space{
                     // console.log(child.name);
                     // child.material = new THREE.MeshPhongMaterial({transparent:true, opacity:0.7});
                     // child.material = new THREE.MeshStandardMaterial();
-                    if(Area_table[child.name].owner == "NONE"){
+                    if(Area_table[child.name].owner == "None"){
                         child.material = new THREE.MeshNormalMaterial({transparent:true, opacity:0.7});
                         child.material = new THREE.MeshBasicMaterial({color: 0x00ffff, transparent:true, opacity:0.7});
                     }else{
@@ -155,12 +155,7 @@ export class virtual_space{
         // this.container.addEventListener("wheel", (event) => {this.move_camera(event);})
     }
 
-    move_camera(event){
-        event.preventDefault();
-        const min = 3;
-        const max = 15
-        this._camera.position.z = Math.min(Math.max(this._camera.position.z+event.deltaY*0.002, min), max)
-    }
+
 
     _setupPicking() {
         this.hoverable = 1;
@@ -219,13 +214,49 @@ export class virtual_space{
         requestAnimationFrame(this.render.bind(this));
     }
 
+    reset_discription(name){
+        let area_info = Area_table[name];
+
+        this.area_number.innerHTML = name;
+        this.owner.innerHTML = area_info.owner;
+        if(area_info.owner == "None"){
+            this.owner.style.color = "red"
+        }else{
+            this.owner.style.color = "aqua"
+        }
+        this.area_size.innerHTML = "Size : " + area_info.size;
+        this.area_popularity.innerHTML = "Popularity : " + area_info.popularity;
+        this.area_price.innerHTML = "Price : " + area_info.price;
+        this.building_size.innerHTML = "Building size : " +  area_info.building_size;
+    }
+
+
+    go_closer(point){
+        let fraction = 0.03;
+        let camera_offset_height = 3
+
+        point.y += camera_offset_height;
+        point.multiplyScalar(fraction);
+
+        this._camera.position.multiplyScalar(1-fraction);
+        this._camera.position.add(point);
+    }
+
+    come_back(){
+        let fraction = 0.03;
+        let root_position_y = 10;
+
+        this._camera.position.multiplyScalar(1-fraction);
+        this._camera.position.y += fraction * root_position_y;
+    }
+
+
     update(time) {
         //this._renderer.setClearColor( 0x00ff00, 1 );
         //auto rotation
         time *= 0.001; // second unit
-        // console.log(time);
-        // this._scene.rotation.y = time*0.2;
 
+        //show animation
         if(this._mixer) {
             const deltaTime = time - this._previousTime;
             this._mixer.update(deltaTime);
@@ -239,74 +270,29 @@ export class virtual_space{
 
             if(this.hoverable){
                 if(intersects[0]){
-                    //// intersects[0].object.material.color.set(0xFFFFFF)
                     intersects[0].object.material.opacity = 0.9;
-                    // console.log(intersects[0].object.position)
-
 
                     for(let i = 0; i < this.raycasting_obj.length; i++){
                         if(intersects[0].object == this.raycasting_obj[i]) {
-                            let name = intersects[0].object.name
-                            let area_info = Area_table[name];
-
-                            this.area_number.innerHTML = name;
-                            this.owner.innerHTML = area_info.owner;
-                            if(area_info.owner == "NONE"){
-                                this.owner.style.color = "red"
-                            }else{
-                                this.owner.style.color = "aqua"
-                            }
-                            this.area_size.innerHTML = "Size : " + area_info.size;
-                            this.area_popularity.innerHTML = "Popularity : " + area_info.popularity;
-                            this.area_price.innerHTML = "Price : " + area_info.price;
-                            this.building_size.innerHTML = "Building size : " +  area_info.building_size;
-
+                            this.reset_discription(intersects[0].object.name);
                             this.discription.style.right = "-96vh"
-                            //this.raycasting_obj[i].position.z = -1;
+
                             this.raycasting_obj[i].position.y = this.raycasting_obj[i].position.y * 0.7 +0.15;
 
-                            //================================================//
-                            // console.log(intersects[0])
-                            let p = intersects[0].point.clone();
-                            // console.log(p)
-                            let q = p.clone();
- 
-
-                            // this.camera_lookat.multiplyScalar(0.999);
-                            // p.multiplyScalar(0.001);
-                            // this.camera_lookat.add(p);
-                            // this._camera.lookAt(this.camera_lookat)
-
-
-                            this._camera.position.multiplyScalar(0.97);
-                            q.y += 3;
-                            q.multiplyScalar(0.03);
-                            this._camera.position.add(q);
-                            // console.log(this._camera.position)
-                             //================================================//
-
+                            let point = intersects[0].point.clone();
+                            this.go_closer(point)
                         }else{
                             this.raycasting_obj[i].position.y = this.raycasting_obj[i].position.y * 0.7;
-                            //// this.raycasting_obj[i].material.color.set(0x00FF00)
                             this.raycasting_obj[i].material.opacity = 0.7;
                         }
                     }
                 }else {
+                    this.discription.style.right = "-135vh";
                     for(let i = 0; i < this.raycasting_obj.length; i++){
-                        this.discription.style.right = "-135vh";
-                    }
-                    for(let i = 0; i < this.raycasting_obj.length; i++){
-                        //// this.raycasting_obj[i].material.color.set(0x00FF00)
                         this.raycasting_obj[i].material.opacity = 0.7;
                         this.raycasting_obj[i].position.y = this.raycasting_obj[i].position.y * 0.7;
                     }
-
-                    //================================================//
-                    this._camera.position.multiplyScalar(0.97);
-                    this._camera.position.y += 0.30;
-                    // this.camera_lookat.multiplyScalar(0.99);
-                    // this._camera.lookAt(this.camera_lookat);
-                    //================================================//
+                    this.come_back();
                 }
             }
         }

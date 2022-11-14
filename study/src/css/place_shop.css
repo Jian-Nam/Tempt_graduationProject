@@ -8,8 +8,6 @@ body {
     background-color: black;
 }
 
-
-
 #title {
     position:absolute;
     font-size: 5vh;
@@ -30,7 +28,6 @@ body {
 }
 
 #area_list_container {
-
     padding:0;
     overflow: hidden;
     position:absolute;
@@ -46,8 +43,6 @@ body {
  
     border-left:solid 2px #FFFFFF;
 
-
-
     -webkit-transition: right  300ms cubic-bezier(.6,0,.4,1);
     -ms-transition: right 300ms cubic-bezier(.6,0,.4,1);
     transition: right 300ms cubic-bezier(.6,0,.4,1);
@@ -55,9 +50,10 @@ body {
 
 #area_list{
     position:absolute;
-    left:0;
+    left:0vh;
     overflow: hidden;
     overflow-y: scroll;
+    width:36vh;
     height:100%;
 
     list-style-type: none;
@@ -68,9 +64,10 @@ body {
 }
 
 #area_list > li{
-    padding:5vh;
-    padding-left: 8vh;
-    padding-right: 8vh;
+    padding:1vh;
+    width:36vh;
+    height:7vh;
+
 
     /* border-left:solid 2px #FFFFFF; */
     /* border-right:solid 2px #FFFFFF; */
@@ -78,6 +75,40 @@ body {
     -webkit-transition: all  300ms cubic-bezier(.6,0,.4,1);
     -ms-transition: all 300ms cubic-bezier(.6,0,.4,1);
     transition: all 300ms cubic-bezier(.6,0,.4,1);
+}
+
+.area_id{
+    position: absolute;
+    left:10vh;
+    font-weight: 900;
+    font-size: 2vh;
+    opacity: 0.3;
+}
+
+
+.area_info{
+    position: absolute;
+    left:20vh;
+    opacity:0.1;
+}
+
+.area_size{
+    margin-top: 0.3vh;
+    font-weight: 400;
+    font-size: 1vh;
+}
+
+.list_element_subtext{
+    margin-top: 0.3vh;
+    font-weight: 400;
+    font-size: 1vh;
+}
+
+.area_owner{
+    margin-top: 0.3vh;
+    font-weight: 900;
+    font-size: 1vh;
+    color:#00FF00
 }
 
 
@@ -129,35 +160,8 @@ body {
 }
 
 
-.area_id{
-    font-weight: 900;
-    font-size: 5vh;
-    opacity: 0.3;
-}
 
-.area_info{
-    margin-top: 1.5vh;
-    opacity:0.1;
-}
 
-.area_size{
-    margin-top: 0.3vh;
-    font-weight: 400;
-    font-size: 2vh;
-}
-
-.list_element_subtext{
-    margin-top: 0.3vh;
-    font-weight: 400;
-    font-size: 2vh;
-}
-
-.area_owner{
-    margin-top: 0.3vh;
-    font-weight: 900;
-    font-size: 2vh;
-    color:#00FF00
-}
 
 
 

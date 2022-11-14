@@ -88,10 +88,9 @@ li{
     top: 0%;
     left: 0%;
     z-index: 1;
-    opacity: 1;
-    background: rgb(0,0,0);
-    background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.7035189075630253) 21%, rgba(0,0,0,0.5046393557422969) 100%);
-    /* background-color: #000000; */
+    opacity: 0.8;
+    background-color: #000000;
+
 
     border-left: 2px solid;
     border-color: white;
@@ -188,7 +187,7 @@ li{
     position:absolute;
     top: 3%;
     left: 10%;
-
+    right:10%;
 }
 
 

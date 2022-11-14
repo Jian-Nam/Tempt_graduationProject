@@ -7,7 +7,7 @@ export class virtual_space_individual{
     constructor(){
         this.container = document.querySelector("#discription_video_virtual");
         this.pixel_container = document.querySelector("#pixels");
-        this.popularity_symbols = ["bike", "car", "human" ,"kickboard", "truck"]
+        this.popularity_symbols = ["bike", "car", "truck"]
 
         const renderer = new THREE.WebGL1Renderer({antialias: true});
         renderer.setPixelRatio(window.devicePixelRatio);
@@ -103,10 +103,7 @@ export class virtual_space_individual{
         this.building_objects = [];
         this.objects = [];
 
-
-        let buiding_names = Area_table[name].buildings;
-
-        let url = "./study/src/areas/" + buiding_names[0];
+        let url = Area_table[name].area
 
         objLoader.load(url, (obj) => {
             // obj.material = new THREE.MeshNormalMaterial();
@@ -165,7 +162,7 @@ export class virtual_space_individual{
 
         for(let i = 0; i<Area_table[name].popularity; i++){
             var p = document.createElement("img");
-            let symbol = this.popularity_symbols[i%5]
+            let symbol = this.popularity_symbols[i%3]
             p.src = "./study/src/pixels/" + symbol + ".png"
             p.classList.add(symbol);
             this.pixel_container.appendChild(p);
