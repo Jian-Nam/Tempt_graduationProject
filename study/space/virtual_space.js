@@ -69,9 +69,9 @@ export class virtual_space{
         light1.position.set(-1, 3, 4);
         this._scene.add(light1);
 
-        // const light2 = new THREE.DirectionalLight(color, 0.8);
-        // light2.position.set(2, 3, 4);
-        // this._scene.add(light2);
+        const light2 = new THREE.DirectionalLight(color, 0.8);
+        light2.position.set(2, 3, 4);
+        this._scene.add(light2);
 
         const light3 = new THREE.DirectionalLight(color, 0.5);
         light3.position.set(0, 0, -7);
@@ -82,17 +82,25 @@ export class virtual_space{
         const gltfLoader = new GLTFLoader();
         gltfLoader.load("./study/src/digital_graffities/test.glb", (gltf)=> {
             const model = gltf.scene;
-
-            model.traverse(child => {
-                if(child instanceof THREE.Mesh){
-                    child.position.set(0, 1, 2);
-                    child.scale.set(20, 20, 20)
-                    child.material = new THREE.MeshNormalMaterial({transparent:true, opacity:0.9});
-                }
-
-            })
+            // model.rotation.z = Math.PI/2
+            model.position.set(0, -2, 0);   
+            // model.traverse(child => {
+            //     if(child instanceof THREE.Mesh){
+            //         // child.material = new THREE.MeshBasicMaterial({color: 0x505050, transparent:true, opacity:0.9});
+            //     }
+            // })
             this._scene.add(model);
             // console.log(model);
+
+            let model2 = model.clone();
+            model2.position.set(16, -2, 0);  
+            // model2.rotation.z = Math.PI/2;
+            this._scene.add(model2);
+
+            let model3 = model.clone();
+            model3.position.set(-16, -2, 0);  
+            // model3.rotation.z = -Math.PI/2;
+            this._scene.add(model3);
 
             const animationClips = gltf.animations;
             const mixer = new THREE.AnimationMixer(model);
@@ -105,8 +113,10 @@ export class virtual_space{
 
             this._mixer = mixer;
             this._animationMap = animationsMap;
-            this._currentAnimationAction = this._animationMap["Curve.005Action"];
-            this._currentAnimationAction.play();
+
+            for(let id in animationsMap){
+                animationsMap[id].play();
+            }
         })
 
 
@@ -114,7 +124,7 @@ export class virtual_space{
         const divisions = 60;
 
         const gridHelper = new THREE.GridHelper( size, divisions );
-        this._scene.add( gridHelper );
+        // this._scene.add( gridHelper );
 
         const objLoader = new OBJLoader();
 
