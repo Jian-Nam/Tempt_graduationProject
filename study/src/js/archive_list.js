@@ -1,11 +1,13 @@
 import { Place_table } from '../../db/database.js';
+import {setupMenu} from "./setupMenu.js"
 
 class App{
     constructor(){
         this.title = document.querySelector("#title");
-        this.title.addEventListener("click", this.go_home.bind(this));
         this.area_list = document.querySelector("#area_list");
         this.area_list_container = document.querySelector("#area_list_container");
+
+        this.setup_menu =  new setupMenu();
 
         this.area_list_container.addEventListener("mouseover", () => {
             // this.area_list_container.style.right = "4vh"
@@ -115,10 +117,7 @@ class App{
         this.p03.src = "./study/src/photoes/" + Place_table[current_id].pic3;
     }
 
-    go_home(){
-        console.log("go home");
-        document.location.href = "index.html";
-    }
+
 
 
     resize() {

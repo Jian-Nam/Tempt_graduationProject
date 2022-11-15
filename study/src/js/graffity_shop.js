@@ -1,5 +1,6 @@
 import { Graffity_table } from "../../db/database.js"
 import { graffity_shop_3Dtypes } from "./graffity_shop_3Dtypes.js"
+import {setupMenu} from "./setupMenu.js"
 
 class App {
     constructor() {
@@ -10,14 +11,12 @@ class App {
 
         this.v1_THREEjs = new graffity_shop_3Dtypes("#v1"); 
         this.v2_THREEjs = new graffity_shop_3Dtypes("#v2"); 
+        this.setup_menu = new setupMenu();
 
         window.onresize = this.resize.bind(this);
     }
     
     set_structure(){
-        this.title = document.querySelector("#title");
-        this.title.addEventListener("click", this.go_home.bind(this));
-
         this.graffity_types_container = document.querySelector("#graffity_types_container")
         
         const scrollContainer = document.querySelector("#list_container");
@@ -29,9 +28,12 @@ class App {
 
     }
 
+
+
     fetch_data(){
         this.list1 = document.querySelector("#list1");
         this.list2 = document.querySelector("#list2");
+        this.listElements = []
 
         var count = 0;
         for(let id in Graffity_table){
@@ -63,9 +65,10 @@ class App {
             }else{
                 this.list2.appendChild(li_elem);
             }
-
+            this.listElements.push(li_elem);
             count+=1
         }
+        
 
         this.list1.style.width = String((count/2+1) * 50) + "vh"
         this.list2.style.width = String(count/2 * 50) + "vh"
@@ -73,7 +76,6 @@ class App {
     }
 
     add_listPageEvent(){
-        this.listElements = document.querySelectorAll("li");
 
         this.index_now = 1;
         for(let value of this.listElements){

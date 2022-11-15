@@ -42,7 +42,7 @@ body {
     overflow: hidden;
 }
 
-li{
+#menu > li{
     width:4vh;
     height:20%;
     text-align: center;

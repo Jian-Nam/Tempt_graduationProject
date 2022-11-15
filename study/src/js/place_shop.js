@@ -2,11 +2,12 @@ import * as THREE from '../../../build/three.module.js';
 import { GLTFLoader } from "../../../examples/jsm/loaders/GLTFLoader.js";
 import { OBJLoader } from "../../../examples/jsm/loaders/OBJLoader.js";
 import { Area_table } from '../../db/database.js';
+import {setupMenu} from "./setupMenu.js"
 
 class App{
     constructor(){
-        this.title = document.querySelector("#title");
-        this.title.addEventListener("click", this.go_home.bind(this));
+        this.setup_menu = new setupMenu();
+
         this.area_list = document.querySelector("#area_list");
         this.area_list_container = document.querySelector("#area_list_container");
 
@@ -125,10 +126,6 @@ class App{
         this.reset_model(current_id);
     }
 
-    go_home(){
-        console.log("go home");
-        document.location.href = "index.html";
-    }
 
     _setupCamera() {
         const width = this.container.clientWidth;

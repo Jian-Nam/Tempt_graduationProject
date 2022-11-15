@@ -32,16 +32,16 @@ body {
     background-color: #000000;
     border-right: 1px solid;
     border-color: white;
-    width:4vh;
-    height:100vh;
+    height:100%;
     display: inline-flex;
-    z-index: 3;
+    z-index: 4;
     font-size: 1.2vh;
     right :0%;
     position:absolute;
     writing-mode: vertical-lr;
     transform: rotate(0.5turn);
     list-style-type: none;
+    overflow: hidden;
 }
 
 #menu > li{

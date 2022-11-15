@@ -29,3 +29,32 @@ body {
 .clickable{
     cursor: pointer;
 }
+
+#menu{
+    background-color: #000000;
+    border-right: 1px solid;
+    border-color: white;
+    height:100%;
+    display: inline-flex;
+    z-index: 2;
+    font-size: 1.2vh;
+    right :0%;
+    position:absolute;
+    writing-mode: vertical-lr;
+    transform: rotate(0.5turn);
+    list-style-type: none;
+    overflow: hidden;
+}
+
+#menu > li{
+    width:4vh;
+    height:20%;
+    text-align: center;
+    line-height: 4vh;
+
+    font-weight: 500;
+
+    -webkit-transition: all 300ms cubic-bezier(.6,0,.4,1);
+    -ms-transition: all 300ms cubic-bezier(.6,0,.4,1);
+    transition: all 300ms cubic-bezier(.6,0,.4,1);
+}
