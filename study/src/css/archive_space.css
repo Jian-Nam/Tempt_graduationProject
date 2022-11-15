@@ -210,6 +210,11 @@ li{
     width:80%;
     left: 10%;
     height:100vh;
+    -ms-overflow-style: none;
+}
+
+#scroll_zone::-webkit-scrollbar{
+    display:none;
 }
 
 .main_text{

@@ -75,7 +75,7 @@ body {
     list-style-type: none;
     -ms-overflow-style: none;
  
-    border-left:solid 2px #FFFFFF;
+    /* border-left:solid 2px #FFFFFF; */
 
     background-color: #000000;
 
@@ -221,11 +221,19 @@ body {
     overflow-y: scroll;
     font-size: 0.7vw;
     line-height: 1.5vw;
+    -ms-overflow-style: none;
 }
+
+#show::-webkit-scrollbar{
+    display:none;
+}
+
+
 #Place_info{
     position: absolute;
     left:5%;
     width:40%;
+    word-break:keep-all;
 }
 
 #Place_photo{
