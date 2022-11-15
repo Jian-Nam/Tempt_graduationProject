@@ -168,6 +168,7 @@ li{
     height:100%;
     z-index: 3;
 
+
     border-left: 1px solid;
     border-color: white;
 }
@@ -185,9 +186,8 @@ li{
 
 #discription_main_text{
     position:absolute;
-    top: 3%;
-    left: 10%;
-    right:10%;
+    top:5%;
+
 }
 
 
@@ -203,11 +203,22 @@ li{
     line-height: 170%;
 }
 
+#scroll_zone{
+    position:absolute;
+    overflow: hidden;
+    overflow-y: scroll;
+    width:80%;
+    left: 10%;
+    height:100vh;
+}
+
 .main_text{
+    margin-top: 10%;
     font-size: 1.3vh;
     font-weight: 400;
     line-height: 170%;
     column-count: 2;
+    word-break: keep-all;
 }
 
 .clickable{
@@ -220,4 +231,24 @@ li{
     font-family: 'Noto Sans KR', sans-serif;
     color:#FFFFFF;
     z-index: 4;
+}
+
+#p01{
+    width:100%;
+    object-fit: contain;
+    margin-top: 5%;
+
+}
+#p02{
+    width:49%;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    object-fit: contain;
+    
+}
+#p03{
+    width:49%;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    object-fit: contain;
 }

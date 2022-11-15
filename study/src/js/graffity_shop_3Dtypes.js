@@ -109,6 +109,31 @@ export class graffity_shop_3Dtypes{
         }
     }
 
+    reset_model_v3(name){
+        const objLoader = new OBJLoader();
+        let object_names = [name]
+
+        for(let i = 0; i< this.objects.length; i++){ 
+            this._scene.remove( this.objects[i] )
+        }
+
+        this.objects = [];
+
+        for(let i = 0; i< object_names.length; i++){ 
+            let directory = './study/src/digital_graffities/' + object_names[i]
+            objLoader.load(directory, (obj)=>{
+                obj.children[0].position.set(0, 0, 0);
+                // obj.children[0].material = new THREE.MeshNormalMaterial({transparent:true, opacity: 0.9});
+                const edges = new THREE.EdgesGeometry( obj.children[0].geometry );
+                const line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x00ffff, linewidth: 100} ) );
+                this._scene.add( line );
+                
+                this._scene.add( line );
+                this.objects.push(line);
+            })
+        }
+    }
+
     resize() {
         const width = this.container.clientWidth;
         const height = this.container.clientHeight;
