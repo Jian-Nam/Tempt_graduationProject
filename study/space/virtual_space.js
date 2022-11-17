@@ -80,27 +80,31 @@ export class virtual_space{
 
     _setupModel() {
         const gltfLoader = new GLTFLoader();
-        gltfLoader.load("./study/src/digital_graffities/test.glb", (gltf)=> {
+        gltfLoader.load("./study/src/digital_graffities/test3.glb", (gltf)=> {
             const model = gltf.scene;
             // model.rotation.z = Math.PI/2
-            model.position.set(0, -2, 0);   
+            model.position.set(-3, -2, 0);  
+            model.rotation.z = Math.PI/18;
+            model.scale.set(2.5, 2.5, 2.5); 
+
+
             // model.traverse(child => {
             //     if(child instanceof THREE.Mesh){
             //         // child.material = new THREE.MeshBasicMaterial({color: 0x505050, transparent:true, opacity:0.9});
             //     }
             // })
-            this._scene.add(model);
+            // this._scene.add(model);
             // console.log(model);
 
             let model2 = model.clone();
-            model2.position.set(16, -2, 0);  
+            model2.position.set(30, -2, 0);  
             // model2.rotation.z = Math.PI/2;
-            this._scene.add(model2);
+            // this._scene.add(model2);
 
             let model3 = model.clone();
-            model3.position.set(-16, -2, 0);  
+            model3.position.set(-30, -2, 0);  
             // model3.rotation.z = -Math.PI/2;
-            this._scene.add(model3);
+            // this._scene.add(model3);
 
             const animationClips = gltf.animations;
             const mixer = new THREE.AnimationMixer(model);
@@ -124,6 +128,48 @@ export class virtual_space{
             // }
         })
 
+        // gltfLoader.load("./study/src/digital_graffities/test2.glb", (gltf)=> {
+        //     const model = gltf.scene;
+        //     // model.rotation.z = Math.PI/2
+        //     model.position.set(0, -2, 0);   
+        //     // model.traverse(child => {
+        //     //     if(child instanceof THREE.Mesh){
+        //     //         // child.material = new THREE.MeshBasicMaterial({color: 0x505050, transparent:true, opacity:0.9});
+        //     //     }
+        //     // })
+        //     this._scene.add(model);
+        //     // console.log(model);
+
+        //     let model2 = model.clone();
+        //     model2.position.set(16, -2, 0);  
+        //     // model2.rotation.z = Math.PI/2;
+
+        //     let model3 = model.clone();
+        //     model3.position.set(-16, -2, 0);  
+        //     // model3.rotation.z = -Math.PI/2;
+
+        //     const animationClips = gltf.animations;
+        //     const mixer = new THREE.AnimationMixer(model);
+        //     const mixer2 = new THREE.AnimationMixer(model2);
+        //     const mixer3 = new THREE.AnimationMixer(model3);
+        //     const animationsMap = {};
+        //     animationClips.forEach(clip => {
+        //         mixer.clipAction(clip).play();
+        //         mixer2.clipAction(clip).play();
+        //         mixer3.clipAction(clip).play();
+        //     });
+
+        //     this._mixer = mixer;
+        //     this._mixer2 = mixer2;
+        //     this._mixer3 = mixer3;
+
+        //     this._animationMap = animationsMap;
+
+        //     // for(let id in animationsMap){
+        //     //     animationsMap[id].play();
+        //     // }
+        // })
+
 
         const size = 100;
         const divisions = 60;
@@ -135,6 +181,7 @@ export class virtual_space{
 
         objLoader.load("./study/src/maps/virtual.obj", (obj) => {
             this._scene.add(obj);
+            obj.position.set(0, 1.5, 0);
             this.architecture = obj;
             this.raycasting_obj = [];
             // console.log(this.architecture);
@@ -156,6 +203,7 @@ export class virtual_space{
 
                     const edges = new THREE.EdgesGeometry( child.geometry );
                     const line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0xffffff, linewidth: 100} ) );
+                    line.position.set(0, 1.5, 0);
                     this._scene.add( line );
 
                 }
@@ -267,7 +315,7 @@ export class virtual_space{
 
 
     update(time) {
-        //this._renderer.setClearColor( 0x00ff00, 1 );
+        this._renderer.setClearColor( 0x00ff00, 0 );
         //auto rotation
         time *= 0.001; // second unit
 

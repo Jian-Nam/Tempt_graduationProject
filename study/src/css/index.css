@@ -12,7 +12,9 @@ body {
     font-size: 5vh;
     font-weight: 900;
     left:3vh;
-    top: 1vh;
+    top: 3vh;
+    width: 20vh;
+    height:10%;
 }
 
 /* #toggle {
@@ -324,4 +326,10 @@ hr{
     font-family: 'Noto Sans KR', sans-serif;
     color:#FFFFFF;
     z-index: 1;
+}
+
+#gg{
+    z-index: -1;
+    position: absolute;
+    width: 100vw;
 }

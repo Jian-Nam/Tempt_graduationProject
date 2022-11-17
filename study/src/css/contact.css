@@ -78,7 +78,7 @@ body {
     align-content: center;
 }
 .item{
-
+    padding:5vh;
 }
 .name{
     text-align: center;
@@ -87,7 +87,7 @@ body {
 }
 .info{
     text-align: center;
-    margin-top: 5vh;
+    margin-top: 8vh;
     font-size: 2vh;
     font-weight: 100;
     line-height: 3vh;
