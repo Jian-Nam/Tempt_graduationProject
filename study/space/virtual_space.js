@@ -82,6 +82,31 @@ export class virtual_space{
     }
 
     _setupModel() {
+
+        // const gltfLoader = new GLTFLoader();
+        // gltfLoader.load("./study/src/maps/virtual_edges.glb", (gltf)=> {
+        //     const model = gltf.scene;
+        //     // model.rotation.z = Math.PI/2
+        //     model.position.set(0, 0, 0);  
+        //     // model.rotation.z = Math.PI/18;
+
+        //     this._scene.add(model);
+
+        //     const animationClips = gltf.animations;
+        //     const mixer = new THREE.AnimationMixer(model);
+        //     const animationsMap = {};
+        //     animationClips.forEach(clip => {
+        //         mixer.clipAction(clip).play();
+        //     });
+
+        //     // this._mixer = mixer;
+
+        //     // this._animationMap = animationsMap;
+
+        //     // for(let id in animationsMap){
+        //     //     animationsMap[id].play();
+        //     // }
+        // })
         const size = 100;
         const divisions = 60;
 
@@ -92,9 +117,10 @@ export class virtual_space{
 
         objLoader.load("./study/src/maps/virtual.obj", (obj) => {
             this.model = obj
-            this.model.position.y = -120;
             this._scene.add(obj);
-            obj.position.set(0, 0, 0);
+            obj.position.set(0, -2, 5);
+            obj.rotation.x = -Math.PI/2
+
             this.architecture = obj;
             this.raycasting_obj = [];
             // console.log(this.architecture);
@@ -121,7 +147,7 @@ export class virtual_space{
                     line.position.set(0, 0, 0);
                     this.lines.push(line);
 
-                    this._scene.add( line );
+                    // this._scene.add( line );
 
                 }
             })
@@ -216,6 +242,7 @@ export class virtual_space{
             this.bg2.children[0].rotation.y += event.deltaY*speed
             this.bg2.children[1].rotation.y += event.deltaY*speed
             this.bg.rotation.z -= event.deltaY*speed
+            this.model.rotation.y -= event.deltaY*speed
         }
     }
 
@@ -317,7 +344,7 @@ export class virtual_space{
 
 
     update(time) {
-        this._renderer.setClearColor( 0x000000, 1 );
+        this._renderer.setClearColor( 0x000000, 0);
         //auto rotation
         time *= 0.001; // second unit
 
