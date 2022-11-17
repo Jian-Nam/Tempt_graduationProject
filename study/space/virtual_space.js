@@ -33,7 +33,10 @@ export class virtual_space{
         this._setupCamera();
         this._setupLight();
         this._setupModel();
-        this._setupControls();
+
+        this._setupBackground1();
+        this._setupBackground2();
+        this._setupControls2();
 
         this.resize();
 
@@ -50,7 +53,7 @@ export class virtual_space{
             75,
             width/height,
             0.001,
-            100
+            1000
         );
         //camera.position.z = 9;
         camera.position.set(0, 10, 0);
@@ -65,112 +68,20 @@ export class virtual_space{
         const color = 0xffffff;
         const intensity = 1;
 
-        const light1 = new THREE.DirectionalLight(color, intensity);
-        light1.position.set(-1, 3, 4);
-        this._scene.add(light1);
+        // const light1 = new THREE.DirectionalLight(color, intensity);
+        // light1.position.set(-1, 3, 4);
+        // this._scene.add(light1);
 
-        const light2 = new THREE.DirectionalLight(color, 0.8);
-        light2.position.set(2, 3, 4);
-        this._scene.add(light2);
+        // const light2 = new THREE.DirectionalLight(color, 0.8);
+        // light2.position.set(2, 3, 4);
+        // this._scene.add(light2);
 
-        const light3 = new THREE.DirectionalLight(color, 0.5);
-        light3.position.set(0, 0, -7);
-        this._scene.add(light3);
+        // const light3 = new THREE.DirectionalLight(color, 0.5);
+        // light3.position.set(0, 0, -7);
+        // this._scene.add(light3);
     }
 
     _setupModel() {
-        const gltfLoader = new GLTFLoader();
-        gltfLoader.load("./study/src/digital_graffities/test3.glb", (gltf)=> {
-            const model = gltf.scene;
-            // model.rotation.z = Math.PI/2
-            model.position.set(-3, -2, 0);  
-            model.rotation.z = Math.PI/18;
-            model.scale.set(2.5, 2.5, 2.5); 
-
-
-            // model.traverse(child => {
-            //     if(child instanceof THREE.Mesh){
-            //         // child.material = new THREE.MeshBasicMaterial({color: 0x505050, transparent:true, opacity:0.9});
-            //     }
-            // })
-            // this._scene.add(model);
-            // console.log(model);
-
-            let model2 = model.clone();
-            model2.position.set(30, -2, 0);  
-            // model2.rotation.z = Math.PI/2;
-            // this._scene.add(model2);
-
-            let model3 = model.clone();
-            model3.position.set(-30, -2, 0);  
-            // model3.rotation.z = -Math.PI/2;
-            // this._scene.add(model3);
-
-            const animationClips = gltf.animations;
-            const mixer = new THREE.AnimationMixer(model);
-            const mixer2 = new THREE.AnimationMixer(model2);
-            const mixer3 = new THREE.AnimationMixer(model3);
-            const animationsMap = {};
-            animationClips.forEach(clip => {
-                mixer.clipAction(clip).play();
-                mixer2.clipAction(clip).play();
-                mixer3.clipAction(clip).play();
-            });
-
-            this._mixer = mixer;
-            this._mixer2 = mixer2;
-            this._mixer3 = mixer3;
-
-            this._animationMap = animationsMap;
-
-            // for(let id in animationsMap){
-            //     animationsMap[id].play();
-            // }
-        })
-
-        // gltfLoader.load("./study/src/digital_graffities/test2.glb", (gltf)=> {
-        //     const model = gltf.scene;
-        //     // model.rotation.z = Math.PI/2
-        //     model.position.set(0, -2, 0);   
-        //     // model.traverse(child => {
-        //     //     if(child instanceof THREE.Mesh){
-        //     //         // child.material = new THREE.MeshBasicMaterial({color: 0x505050, transparent:true, opacity:0.9});
-        //     //     }
-        //     // })
-        //     this._scene.add(model);
-        //     // console.log(model);
-
-        //     let model2 = model.clone();
-        //     model2.position.set(16, -2, 0);  
-        //     // model2.rotation.z = Math.PI/2;
-
-        //     let model3 = model.clone();
-        //     model3.position.set(-16, -2, 0);  
-        //     // model3.rotation.z = -Math.PI/2;
-
-        //     const animationClips = gltf.animations;
-        //     const mixer = new THREE.AnimationMixer(model);
-        //     const mixer2 = new THREE.AnimationMixer(model2);
-        //     const mixer3 = new THREE.AnimationMixer(model3);
-        //     const animationsMap = {};
-        //     animationClips.forEach(clip => {
-        //         mixer.clipAction(clip).play();
-        //         mixer2.clipAction(clip).play();
-        //         mixer3.clipAction(clip).play();
-        //     });
-
-        //     this._mixer = mixer;
-        //     this._mixer2 = mixer2;
-        //     this._mixer3 = mixer3;
-
-        //     this._animationMap = animationsMap;
-
-        //     // for(let id in animationsMap){
-        //     //     animationsMap[id].play();
-        //     // }
-        // })
-
-
         const size = 100;
         const divisions = 60;
 
@@ -180,12 +91,15 @@ export class virtual_space{
         const objLoader = new OBJLoader();
 
         objLoader.load("./study/src/maps/virtual.obj", (obj) => {
+            this.model = obj
+            this.model.position.y = -120;
             this._scene.add(obj);
-            obj.position.set(0, 1.5, 0);
+            obj.position.set(0, 0, 0);
             this.architecture = obj;
             this.raycasting_obj = [];
             // console.log(this.architecture);
 
+            this.lines = []
             this.architecture.traverse(child => {
                 if(child instanceof THREE.Mesh){
                     // console.log(child.name);
@@ -193,9 +107,10 @@ export class virtual_space{
                     // child.material = new THREE.MeshStandardMaterial();
                     if(Area_table[child.name].owner == "None"){
                         child.material = new THREE.MeshNormalMaterial({transparent:true, opacity:0.7});
+                        // child.material = new THREE.MeshBasicMaterial({color: 0x00ff00, transparent:true, opacity:0.7});
                         child.material = new THREE.MeshBasicMaterial({color: 0x00ffff, transparent:true, opacity:0.7});
                     }else{
-                        child.material = new THREE.MeshBasicMaterial({color: 0xff00ff, transparent:true, opacity:0.7});
+                        child.material = new THREE.MeshBasicMaterial({color: 0xbb00ff, transparent:true, opacity:0.7});
                     }
                     
                     // child.material = new THREE.MeshBasicMaterial({color:0x00ff00, wireframe:true});
@@ -203,7 +118,9 @@ export class virtual_space{
 
                     const edges = new THREE.EdgesGeometry( child.geometry );
                     const line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0xffffff, linewidth: 100} ) );
-                    line.position.set(0, 1.5, 0);
+                    line.position.set(0, 0, 0);
+                    this.lines.push(line);
+
                     this._scene.add( line );
 
                 }
@@ -214,9 +131,94 @@ export class virtual_space{
 
     }
 
-    _setupControls() {
-        // this.container.addEventListener("wheel", (event) => {this.move_camera(event);})
+    _setupBackground1(){
+        const gltfLoader = new GLTFLoader();
+        gltfLoader.load("./study/src/maps/virtual_background3.glb", (gltf)=> {
+            const model = gltf.scene;
+            // model.rotation.z = Math.PI/2
+            model.position.set(60, 0, 0);  
+            // model.rotation.z = Math.PI/18;
+
+            this._scene.add(model);
+            this.bg = model;
+
+            const animationClips = gltf.animations;
+            const mixer = new THREE.AnimationMixer(model);
+            const animationsMap = {};
+            animationClips.forEach(clip => {
+                mixer.clipAction(clip).play();
+            });
+
+            this._mixer = mixer;
+
+            this._animationMap = animationsMap;
+
+            // for(let id in animationsMap){
+            //     animationsMap[id].play();
+            // }
+        })
+
     }
+
+    _setupBackground2(){
+        const gltfLoader = new GLTFLoader();
+        gltfLoader.load("./study/src/maps/virtual_background2.glb", (gltf)=> {
+            const model = gltf.scene;
+            // model.rotation.z = Math.PI/2
+            model.position.set(0, 0, 0);  
+            // model.rotation.z = Math.PI/18;
+
+            // model.traverse(child => {
+            //     if(child instanceof THREE.Mesh){
+            //         child.material = new THREE.MeshBasicMaterial({color: 0xdd00ff, wireframe:true});
+            //     }
+            // })
+            this._scene.add(model);
+            this.bg2 = model;
+            console.log(model)
+
+            const animationClips = gltf.animations;
+            const mixer = new THREE.AnimationMixer(model);
+            const animationsMap = {};
+            animationClips.forEach(clip => {
+                mixer.clipAction(clip).play();
+            });
+
+            this._mixer = mixer;
+
+            this._animationMap = animationsMap;
+
+            // for(let id in animationsMap){
+            //     animationsMap[id].play();
+            // }
+        })
+    }
+
+    _setupControls1() {
+        this.container.addEventListener("wheel", (event) => {this.move_bg(event);})
+    }
+
+    _setupControls2() {
+        this.container.addEventListener("wheel", (event) => {this.move_bg2(event);})
+    }
+
+    move_bg(event){
+        event.preventDefault();
+        if(this.bg){
+            this.bg.position.y += event.deltaY*0.01
+        }
+    }
+
+    move_bg2(event){
+        event.preventDefault();
+        let speed = 0.0002
+        if(this.bg2){
+            this.bg2.children[0].rotation.y += event.deltaY*speed
+            this.bg2.children[1].rotation.y += event.deltaY*speed
+            this.bg.rotation.z -= event.deltaY*speed
+        }
+    }
+
 
 
 
@@ -315,16 +317,36 @@ export class virtual_space{
 
 
     update(time) {
-        this._renderer.setClearColor( 0x00ff00, 0 );
+        this._renderer.setClearColor( 0x000000, 1 );
         //auto rotation
         time *= 0.001; // second unit
+
+        // if(this.bg2){
+        //     const deltaTime = time - this._previousTime;
+        //     let offset = 30;
+        //     this.bg.position.y  = Math.min(0 + time*offset, 120);
+        //     this.bg.rotation.y = time
+        //     this.bg2.position.y  = Math.min(-120 + time*offset, 0);
+        //     this.model.position.y  = Math.min(-120 + time*offset, 0);
+        //     // this.model.position.y  *= 0.999
+        //     for(let line of this.lines){
+        //         line.position.y = Math.min(-120 + time*offset, 0);
+        //     }
+        // }
+
+        // if(this.bg2){
+        //     const deltaTime = time - this._previousTime;
+        //     let speed = 0.2
+        //     this.bg2.children[0].rotation.y += deltaTime*speed
+        //     this.bg2.children[1].rotation.y += deltaTime*speed
+        //     this.bg2.children[2].rotation.y -= deltaTime*speed
+        //     this.bg2.children[3].rotation.y -= deltaTime*speed
+        // }
 
         //show animation
         if(this._mixer) {
             const deltaTime = time - this._previousTime;
             this._mixer.update(deltaTime);
-            this._mixer2.update(deltaTime);
-            this._mixer3.update(deltaTime);
 
         }
         this._previousTime = time;
