@@ -83,30 +83,30 @@ export class virtual_space{
 
     _setupModel() {
 
-        // const gltfLoader = new GLTFLoader();
-        // gltfLoader.load("./study/src/maps/virtual_edges.glb", (gltf)=> {
-        //     const model = gltf.scene;
-        //     // model.rotation.z = Math.PI/2
-        //     model.position.set(0, 0, 0);  
-        //     // model.rotation.z = Math.PI/18;
+        const gltfLoader = new GLTFLoader();
+        gltfLoader.load("./study/src/maps/virtual_edges.glb", (gltf)=> {
+            const model = gltf.scene;
+            // model.rotation.z = Math.PI/2
+            model.position.set(0, 0, 0);  
+            // model.rotation.z = Math.PI/18;
 
-        //     this._scene.add(model);
+            this._scene.add(model);
 
-        //     const animationClips = gltf.animations;
-        //     const mixer = new THREE.AnimationMixer(model);
-        //     const animationsMap = {};
-        //     animationClips.forEach(clip => {
-        //         mixer.clipAction(clip).play();
-        //     });
+            const animationClips = gltf.animations;
+            const mixer = new THREE.AnimationMixer(model);
+            const animationsMap = {};
+            animationClips.forEach(clip => {
+                mixer.clipAction(clip).play();
+            });
 
-        //     // this._mixer = mixer;
+            // this._mixer = mixer;
 
-        //     // this._animationMap = animationsMap;
+            // this._animationMap = animationsMap;
 
-        //     // for(let id in animationsMap){
-        //     //     animationsMap[id].play();
-        //     // }
-        // })
+            // for(let id in animationsMap){
+            //     animationsMap[id].play();
+            // }
+        })
         const size = 100;
         const divisions = 60;
 
@@ -132,7 +132,7 @@ export class virtual_space{
                     // child.material = new THREE.MeshPhongMaterial({transparent:true, opacity:0.7});
                     // child.material = new THREE.MeshStandardMaterial();
                     if(Area_table[child.name].owner == "None"){
-                        child.material = new THREE.MeshNormalMaterial({transparent:true, opacity:0.7});
+                        // child.material = new THREE.MeshNormalMaterial({transparent:true, opacity:0.7});
                         // child.material = new THREE.MeshBasicMaterial({color: 0x00ff00, transparent:true, opacity:0.7});
                         child.material = new THREE.MeshBasicMaterial({color: 0x00ffff, transparent:true, opacity:0.7});
                     }else{
@@ -239,8 +239,8 @@ export class virtual_space{
         event.preventDefault();
         let speed = 0.0002
         if(this.bg2){
-            this.bg2.children[0].rotation.y += event.deltaY*speed
-            this.bg2.children[1].rotation.y += event.deltaY*speed
+            this.bg2.children[2].rotation.y += event.deltaY*speed
+            this.bg2.children[3].rotation.y += event.deltaY*speed
             this.bg.rotation.z -= event.deltaY*speed
             // this.model.rotation.y -= event.deltaY*speed
         }

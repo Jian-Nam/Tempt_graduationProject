@@ -164,7 +164,7 @@ body {
     color:#DDDDDD;
     font-weight: 300;
     font-size: 1.5vh;
-    line-height: 2.5vh;
+    line-height: 150%;
     margin-left: 3vh;
 }
 
@@ -178,8 +178,7 @@ hr{
     position:absolute;
     width:100%;
     top: 60%;
-    font-size: 100%;
-    line-height: 150%;
+
 }
 
 
@@ -335,10 +334,20 @@ hr{
     width: 100%;
     height: 100%;
     object-fit: cover;
-    background-color: #000000;
+    background-color: #ffffff;
 }
 
 #iimg{
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    left:0;
+    right: 0;
+    top:0;
+    bottom:0;
+    margin:auto;
+
+    object-fit: cover;
 
 }
 
@@ -361,7 +370,7 @@ hr{
     z-index: 1;
     position: absolute;
     width:100%;
-    height:12%;
+    height:8%;
     bottom:0;
     background-color: #101010;
     border-top: 1px solid;
@@ -387,8 +396,8 @@ hr{
 
 #shell_text{
     font-family: 'JetBrains Mono', monospace;
-    font-size: 2vh;
+    font-size: 1.5vh;
     color:aqua;
-    margin-left:2vh;
-    margin-top:2vh;
+    margin-top:auto;
+    margin-bottom:auto;
 }
