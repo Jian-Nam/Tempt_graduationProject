@@ -210,9 +210,9 @@ export class virtual_space{
                 mixer.clipAction(clip).play();
             });
 
-            this._mixer = mixer;
+            // this._mixer = mixer;
 
-            this._animationMap = animationsMap;
+            // this._animationMap = animationsMap;
 
             // for(let id in animationsMap){
             //     animationsMap[id].play();
