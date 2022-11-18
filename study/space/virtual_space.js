@@ -36,7 +36,9 @@ export class virtual_space{
 
         this._setupBackground1();
         this._setupBackground2();
+        this.import_graffiti();
         this._setupControls2();
+
 
         this.resize();
 
@@ -136,7 +138,8 @@ export class virtual_space{
                         // child.material = new THREE.MeshBasicMaterial({color: 0x00ff00, transparent:true, opacity:0.7});
                         child.material = new THREE.MeshBasicMaterial({color: 0x00ffff, transparent:true, opacity:0.7});
                     }else{
-                        child.material = new THREE.MeshBasicMaterial({color: 0xbb00ff, transparent:true, opacity:0.7});
+                        child.material = new THREE.MeshBasicMaterial({color: 0xffffff, transparent:true, opacity:0.7});
+                        // child.material = new THREE.MeshBasicMaterial({color: 0x9900ff, transparent:true, opacity:0.7});
                     }
                     
                     // child.material = new THREE.MeshBasicMaterial({color:0x00ff00, wireframe:true});
@@ -220,6 +223,31 @@ export class virtual_space{
         })
     }
 
+    import_graffiti(){
+        const objLoader = new OBJLoader();
+        objLoader.load("./study/src/digital_graffities/g001_v2.obj", (obj)=> {
+            const model = obj;
+            model.rotation.x = -Math.PI/2
+            model.position.set(0, 0, 2);  
+            model.scale.set(2, 2, 2)
+
+            model.traverse(child => {
+                if(child instanceof THREE.Mesh){
+                    child.material = new THREE.MeshBasicMaterial({color:0x00ffff})
+                }
+            });
+                
+    
+            // model.rotation.z = Math.PI/18;
+
+            this._scene.add(model);
+            this.graffiti = model;
+        })
+
+    }
+
+    
+
     _setupControls1() {
         this.container.addEventListener("wheel", (event) => {this.move_bg(event);})
     }
@@ -242,7 +270,8 @@ export class virtual_space{
             this.bg2.children[2].rotation.y += event.deltaY*speed
             this.bg2.children[3].rotation.y += event.deltaY*speed
             this.bg.rotation.z -= event.deltaY*speed
-            // this.model.rotation.y -= event.deltaY*speed
+            this.graffiti.position.y += event.deltaY*speed*4
+            // \this.model.rotation.y -= event.deltaY*speed
         }
     }
 
