@@ -118,8 +118,8 @@ export class virtual_space{
         objLoader.load("./study/src/maps/virtual.obj", (obj) => {
             this.model = obj
             this._scene.add(obj);
-            obj.position.set(0, -2, 5);
-            obj.rotation.x = -Math.PI/2
+            obj.position.set(0, 0, 0);
+            // obj.rotation.x = -Math.PI/2
 
             this.architecture = obj;
             this.raycasting_obj = [];
@@ -147,7 +147,7 @@ export class virtual_space{
                     line.position.set(0, 0, 0);
                     this.lines.push(line);
 
-                    // this._scene.add( line );
+                    this._scene.add( line );
 
                 }
             })
@@ -242,7 +242,7 @@ export class virtual_space{
             this.bg2.children[0].rotation.y += event.deltaY*speed
             this.bg2.children[1].rotation.y += event.deltaY*speed
             this.bg.rotation.z -= event.deltaY*speed
-            this.model.rotation.y -= event.deltaY*speed
+            // this.model.rotation.y -= event.deltaY*speed
         }
     }
 
