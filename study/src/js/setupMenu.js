@@ -24,7 +24,7 @@ export class setupMenu{
                 this.menu_elements[i].style.color = "white";
                 this.menu_elements[i].style.width = "4vh";
                 this.menu_elements[i].style.lineHeight = "4vh";
-                this.menu_elements[i].style.background = "#000000"
+                this.menu_elements[i].style.background = "#bb00ff"
             });
         }
 
