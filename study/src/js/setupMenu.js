@@ -15,10 +15,10 @@ export class setupMenu{
 
         for(let i = 0; i<this.menu_elements.length; i++){
             this.menu_elements[i].addEventListener("mouseover", (event) => {
-                this.menu_elements[i].style.color = "aqua";
-                this.menu_elements[i].style.width = "8vh";
-                this.menu_elements[i].style.lineHeight = "8vh";
-                this.menu_elements[i].style.background = "#101010"
+                this.menu_elements[i].style.color = "#bb00ff";
+                // this.menu_elements[i].style.width = "8vh";
+                // this.menu_elements[i].style.lineHeight = "8vh";
+                this.menu_elements[i].style.background = "#00ffff"
             });
             this.menu_elements[i].addEventListener("mouseout", (event) => {
                 this.menu_elements[i].style.color = "white";
